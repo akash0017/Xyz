@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/6658b0beca.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="box1">
+            <div class="logomap">
+            <h1 class="logo">Forecast</h1>
+            </div>
+            <div class="cont">
+            <p>The Only Weather Forecast You Need</p>
+                <div class="line"></div>  
+
+            <div class="box">
+                <input type="search" placeholder="search">
+                <i class="fa-solid fa-magnifying-glass">
+            </div>     
+        </div>
+    </div>
+        <div class="box2">
+            <div class="nav">
+                <ul>
+                    <li><a href="#">Weather</a></li>
+                    <li><a href="#">Alerts</a></li>
+                    <li><a href="#">Map</a></li>
+                    <li><a href="#">Setelite</a></li>
+                    <li><a href="#">News</a></li>
+                </ul>
+            </div>
+            <div class="weath">
+            <h2 class="day">Today</h2>
+                <div class="wethtemp">
+                    <div class="dayt">
+                        <h1 class="temp">32°</h1>
+                        <h2 class="clouds">Sunny</h2>
+                        <!-- <img src="" alt=""> -->
+                        <h2 class="city"></h2>
+                    </div>
+                    <div class="line2"></div>
+                    <div class="tempw">
+                        <ul>
+                            <li class="humidity">Humidity</li>
+                            <li class="wind">wind</li>
+                            <li>Cloud cover</li>
+                            <li>Visibility</li>
+                            <li>UV index</li>
+                        </ul>
+                    </div>
+                </div>
+                <h2 class="day">Daily</h2>
+           <div class="scroll">
+            <div class="sbox sb1">
+                <h1 class="temp1">28°</h1>
+                <h2 class="cloud1">Rain</h2>
+                <h4 class="days1">Mon 22,june</h4>
+            </div>
+            <div class="sbox sb2">
+                <h1 class="temp1">28°</h1>
+                <h2 class="cloud1">cloudy</h2>
+                <h4 class="days1">Tue 23,june</h4>
+            </div>
+            <div class="sbox sb3">
+                <h1 class="temp1">28°</h1>
+                <h2 class="cloud1">Tstrom</h2>
+                <h4 class="days1">Wed 24,june</h4>
+            </div>
+            <div class="sbox sb4">
+                <h1 class="temp1">28°</h1>
+                <h2 class="cloud1">sunny</h2>
+                <h4 class="days1">Thu 25,june</h4>
+            </div>
+            <div class="sbox sb5">
+                <h1 class="temp1">30°</h1>
+                <h2 class="cloud1">cloudy</h2>
+                <h4 class="days1">Fri 26,june</h4>
+            </div>
+           </div>
+           </div>
+           
+        </div>
+    </div>
+    <script>
+         const apikey='c82ee6869caef02fe08723bcc531bb5b';
+        const apiurl="https://api.openweathermap.org/data/2.5/weather?units=metric&q=";
+
+
+        const searchbox = document.querySelector(".box input");
+        const searchbtn = document.querySelector(".box .fa-solid");
+
+        async function check(city){
+            const response= await fetch(apiurl + city +`&appid=${apikey}`);
+            var data = await response.json();
+            console.log(data);
+
+            document.querySelector(".city").innerHTML=data.name;
+            document.querySelector(".temp").innerHTML= data.main.temp+ "°C";
+            document.querySelector(".humidity").innerHTML="Humidity-"+data.main.humidity + "%";
+            document.querySelector(".wind").innerHTML="wind-"+data.wind.speed + "km/h";
+        }
+
+        searchbtn.addEventListener("click", ()=>{
+            check(searchbox.value);
+        });
+        check();
+    </script>
+</body>
+</html>
